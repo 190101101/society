@@ -1,15 +1,4 @@
-const isAuth = (req, res, next) => {
-  if (!req.session.user) {
-    return res.redirect('/login');
-  }
-  next();
-};
+const midd1 = (req, res, next) => {};
+const midd2 = (req, res, next) => {};
 
-const isNoAuth = (req, res, next) => {
-  if (req.session.user) {
-    return res.redirect('/');
-  }
-  next();
-};
-
-module.exports = { isAuth, isNoAuth };
+module.exports = { midd1, midd2 };

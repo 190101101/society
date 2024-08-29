@@ -1,14 +1,14 @@
 const { validationResult } = require('express-validator');
-const { User: model } = require('../core/model');
+const { Auth: model } = require('../core/model');
 
 const login = async (req, res) => {
-  res.render('user/login', {
+  res.render('auth/login', {
     layout: 'layout/login',
   });
 };
 
 const register = (req, res) => {
-  res.render('user/register', {
+  res.render('auth/register', {
     layout: 'layout/login',
   });
 };
