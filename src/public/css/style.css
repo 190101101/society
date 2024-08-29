@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+}
+
+@layer utilities {
+  .border-bottom-dashed {
+    border-bottom-width: 1px;
+    border-bottom-style: dashed;
+  }
+}
