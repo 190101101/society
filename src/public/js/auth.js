@@ -1,3 +1,4 @@
+import { client } from './socket.js';
 import '/node/axios/dist/axios.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -21,19 +22,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     console.log(response.data);
 
-    if (response.data.status === true) {
-      setTimeout(() => {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        window.location.href = 'http://localhost:5000';
-      }, 500);
-    }
-
     if (response.data.errors) {
       alert(response.data.errors[0].msg);
     }
 
     if (response.data.status === false) {
       alert(response.data.message);
+    }
+
+    if (response.data.status === true) {
+      client.emit('client:newuser', response.data.user);
+
+      setTimeout(() => {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        // window.location.href = 'http://localhost:5000';
+      }, 500);
     }
 
     setTimeout(() => {
