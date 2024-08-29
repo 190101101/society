@@ -1,4 +1,4 @@
-const { User: database } = require('../database');
+const { User: database } = require('../core/database');
 
 const Login = (req, res, findUser) => {
   const { password } = req.body;

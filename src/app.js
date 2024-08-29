@@ -3,13 +3,12 @@ const createError = require('http-errors');
 const path = require('path');
 const express = require('express');
 const layouts = require('express-ejs-layouts');
-const http = require('http');
-const socket = require('./boot/socket');
 const cors = require('cors');
+const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { user } = require('./route/index');
+const { user } = require('./core/route');
 
 const app = express();
 
@@ -17,9 +16,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cors());
-app.use(morgan('dev'));
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cors({ origin: 'http://localhost:5000' }));
+// app.use(morgan('dev'));
+// app.use(helmet());
 app.use(cookieParser());
 
 app.use('/public', express.static(path.join(__dirname, 'public')));

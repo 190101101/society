@@ -1,5 +1,5 @@
-const { User: database } = require('../database');
-const { User: model } = require('../model');
+const { User: database } = require('../core/database');
+const { User: model } = require('../core/model');
 const { validationResult } = require('express-validator');
 
 const homePage = (req, res) => {

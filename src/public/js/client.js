@@ -1,5 +1,6 @@
 import '/socket.io/socket.io.js';
 import { displayMessages } from './boot.js';
+
 const client = io('http://localhost:5000');
 
 client.on('connect', () => {
