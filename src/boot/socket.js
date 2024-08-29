@@ -1,5 +1,5 @@
 const { Server } = require('socket.io');
-const { User: database, Message } = require('../core/database');
+const { User, Message } = require('../core/database');
 
 let online = [];
 
@@ -16,7 +16,7 @@ const socket = (httpServer) => {
 
     io.emit('server:data', {
       online: online.length,
-      users: database.length,
+      users: User.length,
       messages: Message.length,
     });
 
@@ -30,8 +30,13 @@ const socket = (httpServer) => {
     socket.on('client:newuser', (data) => {
       io.emit('server:newuser', data);
       io.emit('server:users', {
-        users: database.length,
+        users: User.length,
       });
+    });
+
+    socket.emit('client:content', {
+      users: User.reverse(),
+      messages: Message,
     });
 
     socket.on('disconnecting', () => {
@@ -39,7 +44,7 @@ const socket = (httpServer) => {
 
       io.emit('server:data', {
         online: online.length,
-        users: database.length,
+        users: User.length,
         messages: Message.length,
       });
     });
