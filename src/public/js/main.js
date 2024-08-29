@@ -31,5 +31,3 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }, 10);
 });
-
-// console.log(JSON.parse(localStorage.getItem('user')));

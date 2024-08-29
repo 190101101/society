@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const { home, auth, user } = require('./core/route');
+const { home, message, auth, user } = require('./core/route');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 // app.use(cors({ origin: 'http://localhost:5000' }));
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(helmet());
 app.use(cookieParser());
 
@@ -48,6 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.use(home);
+app.use(message);
 app.use(auth);
 app.use(user);
 

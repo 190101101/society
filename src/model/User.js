@@ -1,4 +1,4 @@
-const { User: database, Icon } = require('../core/database');
+const { User: database } = require('../core/database');
 
 const Users = (req, res) => {
   return database;

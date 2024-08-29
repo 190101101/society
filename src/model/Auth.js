@@ -15,7 +15,7 @@ const Login = (req, res) => {
     return { status: false, message: 'incorrect password' };
   }
 
-  findedUser.updatedAt = new Date();
+  findedUser.updatedAt = new Date().toLocaleString();
 
   // session and cookie
   req.cookies.user = findedUser;
@@ -38,8 +38,8 @@ const Register = (req, res) => {
     id: Date.now(),
     username,
     password,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date().toLocaleString(),
+    updatedAt: new Date().toLocaleString(),
     icon: Icon[Math.floor(Math.random() * 98)],
   };
 

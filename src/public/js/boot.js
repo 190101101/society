@@ -1,5 +1,27 @@
 window.addEventListener('DOMContentLoaded', () => {});
 
+export const displayUsers = (data) => {
+  const userList = document.querySelector('.user-list');
+  const isOdd = userList.children.length % 2 === 0;
+  const backgroundClass = isOdd ? 'bg-main-light-grey' : '';
+
+  const html = `
+    <div class="flex justify-between mb-1 w-[100%] group ${backgroundClass}">
+      <div class="flex items-start justify-center basis-[20%] opacity-50">
+        <img class="h-8 w-8" src="/public/icons/${data.icon}" />
+      </div>
+      <div class="basis-[80%] flex flex-col font-consolas font-bold">
+        <div class="flex justify-between items-center">
+          <div class="text-main-dark-green opacity-50">${data.username}</div>
+          <div class="w-2 h-2 mr-1 bg-main-orange rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  userList.insertAdjacentHTML('beforeend', html);
+};
+
 export const displayMessages = (data) => {
   const chatMessages = document.querySelector('.chat-messages');
   const isOdd = chatMessages.children.length % 2 === 0;
@@ -13,7 +35,7 @@ export const displayMessages = (data) => {
     <div class="basis-[96%] flex flex-col font-consolas font-bold">
       <div class="flex justify-between">
         <span class="text-main-dark-green">cookie</span>
-        <span class="text-gray-400">${data.date}</span>
+        <span class="text-gray-400">${data.createdAt}</span>
       </div>
       <div class="text-gray-400">${data.message}</div>
     </div>

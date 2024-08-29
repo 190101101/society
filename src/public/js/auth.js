@@ -1,41 +1,43 @@
 import '/node/axios/dist/axios.js';
 
-const formDataSet = document.querySelector('[data-action]');
-const inputs = document.querySelectorAll('input');
-const button = document.querySelector('button');
-let values = {};
+window.addEventListener('DOMContentLoaded', () => {
+  const formDataSet = document.querySelector('[data-action]');
+  const inputs = document.querySelectorAll('input');
+  const button = document.querySelector('button');
+  let values = {};
 
-button.addEventListener('click', async (e) => {
-  button.disabled = true;
-  e.preventDefault();
+  button.addEventListener('click', async (e) => {
+    button.disabled = true;
+    e.preventDefault();
 
-  inputs.forEach((input) => {
-    values[input.name] = input.value;
-  });
+    inputs.forEach((input) => {
+      values[input.name] = input.value;
+    });
 
-  const response = await axios.post(
-    `http://localhost:5000/${formDataSet.dataset.action}`,
-    values
-  );
+    const response = await axios.post(
+      `http://localhost:5000/${formDataSet.dataset.action}`,
+      values
+    );
 
-  console.log(response.data);
+    console.log(response.data);
 
-  if (response.data.status === true) {
+    if (response.data.status === true) {
+      setTimeout(() => {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        window.location.href = 'http://localhost:5000';
+      }, 500);
+    }
+
+    if (response.data.errors) {
+      alert(response.data.errors[0].msg);
+    }
+
+    if (response.data.status === false) {
+      alert(response.data.message);
+    }
+
     setTimeout(() => {
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      window.location.href = 'http://localhost:5000';
-    }, 500);
-  }
-
-  if (response.data.errors) {
-    alert(response.data.errors[0].msg);
-  }
-
-  if (response.data.status === false) {
-    alert(response.data.message);
-  }
-
-  setTimeout(() => {
-    button.disabled = false;
-  }, 1000);
+      button.disabled = false;
+    }, 1000);
+  });
 });
