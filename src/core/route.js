@@ -1,2 +1,3 @@
 const user = require('../route/user');
-module.exports = { user };
+const auth = require('../route/auth');
+module.exports = { user, auth };

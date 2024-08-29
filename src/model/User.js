@@ -1,38 +1,6 @@
-const { User: database } = require('../core/database');
+const { User: database, Icon } = require('../core/database');
 
-const Login = (req, res, findUser) => {
-  const { password } = req.body;
-
-  if (password != findUser.password) {
-    return { status: false, message: 'incorrect password' };
-  }
-
-  findUser.updatedAt = new Date();
-
-  // session and cookie
-  req.cookies.user = findUser;
-  req.session.user = findUser;
-  return { status: true, findUser };
-};
-
-const Register = (req, res) => {
-  const { username, password } = req.body;
-
-  const user = {
-    id: Date.now(),
-    username,
-    password,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    icon: 'monster1.png',
-  };
-
-  database.push(user);
-
-  // session and cookie
-  req.cookies.user = user;
-  req.session.user = user;
-  return { status: true, user };
-};
+const Login = (req, res) => {};
+const Register = (req, res) => {};
 
 module.exports = { Login, Register };
