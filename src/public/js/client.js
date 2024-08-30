@@ -9,7 +9,7 @@ client.on('server:connect', () => {
   client.emit('client:online:check', UserData);
 
   client.on('server:online:check', (data) => {
-    console.log(data);
+    // data.forEach((element) => displayUsers(element, 'afterbegin'));
   });
 });
 

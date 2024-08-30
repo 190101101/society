@@ -2,8 +2,6 @@ import '/node/axios/dist/axios.js';
 import { UserData } from './global.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  console.log(UserData);
-
   const button = document.querySelector('.form-button');
   const input = document.querySelector('.form-input');
 
@@ -29,10 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (response.data.status === false) {
       alert(response.data.message);
-    }
-
-    if (response.data.status === true) {
-      // displayMessages(response.data.messageObject);
     }
 
     input.value = '';

@@ -31,10 +31,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (response.data.status === true) {
-      // client.emit('client:newuser', response.data.user);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
 
       setTimeout(() => {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
         window.location.href = 'http://localhost:5000';
       }, 500);
     }

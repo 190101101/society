@@ -4,24 +4,24 @@ const { User: database, Icon } = require('../core/database');
 const Login = (req, res) => {
   const { username, password } = req.body;
 
-  const findedUser = database.find((data) => {
+  const user = database.find((data) => {
     return data.username === username;
   });
 
-  if (!findedUser) {
+  if (!user) {
     return { status: false, message: 'user not found' };
   }
 
-  if (password != findedUser.password) {
+  if (password != user.password) {
     return { status: false, message: 'incorrect password' };
   }
 
-  findedUser.updatedAt = new Date().toLocaleString();
+  user.updatedAt = new Date().toLocaleString();
 
   // session and cookie
-  req.cookies.user = findedUser;
-  req.session.user = findedUser;
-  return { status: true, findedUser };
+  req.cookies.user = user;
+  req.session.user = user;
+  return { status: true, user };
 };
 
 const Register = (req, res) => {

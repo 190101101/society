@@ -1,5 +1,4 @@
 import '/node/axios/dist/axios.js';
-import { UserData } from './global.js';
 import { displayUsers, displayMessages } from './boot.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +14,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
   UserFetcher();
   MessageFetcher();
-
-  //
-  displayUsers(UserData, 'afterbegin');
 });

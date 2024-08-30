@@ -1,12 +1,12 @@
 const route = require('express').Router();
 const { message: controller } = require('../core/controller');
-const { sanitize: middleware } = require('../core/middleware');
+const { sanitize: middleware, auth } = require('../core/middleware');
 const { message: validator } = require('../core/validator');
 
-route.get('/messages', controller.messages);
+route.get('/messages', auth.isAuth, controller.messages);
 route.post(
   '/messages',
-  [middleware.bodySanitize, validator.messageSchema],
+  [auth.isAuth, middleware.bodySanitize, validator.messageSchema],
   controller.sendMessage
 );
 
