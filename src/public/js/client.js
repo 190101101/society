@@ -2,6 +2,10 @@ import { client } from './socket.js';
 import { displayMessages, displayUsers } from './boot.js';
 import { onlineText, usersText, messagesText } from './elements.js';
 
+// client.on('connect', () => console.log(client.id));
+// client.emit('client:send', true);
+client.on('server', (data) => console.log(data));
+
 // sidebar content
 client.on('server:data', (data) => {
   onlineText.textContent = data.online;

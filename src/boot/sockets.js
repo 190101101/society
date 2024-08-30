@@ -1,10 +1,15 @@
 const { User, Message } = require('../core/database');
+const { setSocket } = require('./client');
 
 let online = [];
 
 module.exports = function (io) {
   io.on('connection', (socket) => {
     online.push(socket.id);
+
+    setSocket(socket.id);
+
+    console.log('socket.id:', socket.id);
 
     io.emit('server:data', {
       online: online.length,
