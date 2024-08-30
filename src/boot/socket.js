@@ -5,9 +5,11 @@ let io;
 module.exports = {
   init: (server) => {
     io = socket(server, {
-      // path: 'tmp',
+      /*
+      path: 'tmp',
       pingTimeout: 30000,
       extraHeaders: { 'socket-server': 'token' },
+      */
       cors: {
         origin: '*',
         method: ['GET', 'POST'],

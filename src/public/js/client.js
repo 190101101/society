@@ -3,7 +3,6 @@ import { displayMessages, displayUsers } from './boot.js';
 import { onlineText, usersText, messagesText } from './elements.js';
 
 // sidebar content
-
 client.on('server:data', (data) => {
   onlineText.textContent = data.online;
   usersText.textContent = data.users;

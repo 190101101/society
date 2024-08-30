@@ -18,8 +18,9 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 // app.use(cors({ origin: 'http://localhost:5000' }));
+app.use(cors());
 // app.use(morgan('dev'));
-app.use(helmet());
+// app.use(helmet());
 app.use(cookieParser());
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
