@@ -30,6 +30,10 @@ client.on('server:newuser', (data) => {
   displayUsers(data, 'afterbegin');
 });
 
+client.on('server:online', (data) => {
+  // data.forEach((socket) => {});
+});
+
 // sidebar content
 
 // main content

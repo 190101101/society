@@ -1,6 +1,4 @@
 import '/node/axios/dist/axios.js';
-import { client } from './socket.js';
-import { displayMessages } from './boot.js';
 import { UserData } from './global.js';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -37,6 +35,6 @@ window.addEventListener('DOMContentLoaded', () => {
       // displayMessages(response.data.messageObject);
     }
 
-    // input.value = '';
+    input.value = '';
   });
 });

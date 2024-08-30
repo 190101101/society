@@ -1,11 +1,13 @@
 window.addEventListener('DOMContentLoaded', () => {});
 
-export const displayUsers = (data, mode = 'beforeend') => {
+export const displayUsers = (data, mode = 'beforeend', online = false) => {
   const userList = document.querySelector('.user-list');
+
   const isOdd = userList.children.length % 2 === 0;
   const backgroundClass = isOdd ? 'bg-main-light-grey' : '';
-  const onlineClass = isOdd ? 'bg-main-dark-green' : 'bg-main-orange';
-  const opacityClass = isOdd ? '' : 'opacity-50';
+
+  const onlineClass = online == false ? 'bg-main-orange' : 'bg-main-dark-green';
+  const opacityClass = online == false ? 'opacity-50' : '';
 
   const html = `
     <div class="flex justify-between mb-1 w-[100%] group ${backgroundClass}">

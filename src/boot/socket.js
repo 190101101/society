@@ -15,6 +15,7 @@ module.exports = function (server) {
     online.push(socket.id);
 
     socket.emit('server:connect', socket.id);
+    socket.emit('server:online', online);
 
     io.emit('server:data', {
       online: online.length,
@@ -24,7 +25,6 @@ module.exports = function (server) {
 
     socket.on('client:message', (data) => {
       socket.broadcast.emit('server:message', data);
-
       io.emit('server:messages', {
         messages: Message.length,
       });
@@ -38,7 +38,7 @@ module.exports = function (server) {
     });
 
     socket.emit('client:content', {
-      users: User.reverse(),
+      users: User,
       messages: Message,
     });
 

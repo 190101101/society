@@ -1,5 +1,5 @@
 const auth = require('../middleware/auth');
 const user = require('../middleware/user');
-const message = require('../middleware/message');
+const sanitize = require('../middleware/sanitize');
 
-module.exports = { user, auth, message };
+module.exports = { user, auth, sanitize };
