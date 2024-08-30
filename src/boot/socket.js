@@ -15,11 +15,6 @@ module.exports = function (server) {
     online.push(socket.id);
 
     socket.emit('server:connect', socket.id);
-    console.log('socket.id:', socket.id);
-
-    socket.on('client:hello', (data) => {
-      console.log(data);
-    });
 
     io.emit('server:data', {
       online: online.length,
@@ -29,6 +24,7 @@ module.exports = function (server) {
 
     socket.on('client:message', (data) => {
       socket.broadcast.emit('server:message', data);
+
       io.emit('server:messages', {
         messages: Message.length,
       });

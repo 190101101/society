@@ -16,8 +16,8 @@ const sendMessage = (req, res) => {
   };
 
   database.push(messageObject);
+  client.emit('client:message', req.body);
 
-  client.emit('client:hello', req.body);
   return { status: true, messageObject };
 };
 

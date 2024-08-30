@@ -25,12 +25,6 @@ window.addEventListener('DOMContentLoaded', () => {
       messageObject
     );
 
-    client.emit('client:hello', 'hello');
-
-    client.on('server:hello', (data) => {
-      console.log(data);
-    });
-
     if (response.data.errors) {
       alert(response.data.errors[0].msg);
     }
@@ -40,8 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (response.data.status === true) {
-      displayMessages(response.data.messageObject);
-      client.emit('client:message', response.data.messageObject);
+      // displayMessages(response.data.messageObject);
     }
 
     input.value = '';
