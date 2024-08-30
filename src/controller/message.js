@@ -1,8 +1,6 @@
 const { validationResult } = require('express-validator');
 const { Message: model } = require('../core/model');
 
-const client = require('../boot/client');
-
 const messages = async (req, res) => {
   res.json(model.Messages());
 };
@@ -10,8 +8,6 @@ const messages = async (req, res) => {
 const sendMessage = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.json(errors).status(200);
-
-  client.emit('client:hello', req.body);
 
   const data = model.sendMessage(req, res);
   return res.json(data).status(200);

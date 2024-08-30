@@ -1,3 +1,4 @@
+const client = require('../boot/client');
 const { Message: database } = require('../core/database');
 
 const Messages = (req, res) => {
@@ -15,6 +16,8 @@ const sendMessage = (req, res) => {
   };
 
   database.push(messageObject);
+
+  client.emit('client:hello', req.body);
   return { status: true, messageObject };
 };
 
