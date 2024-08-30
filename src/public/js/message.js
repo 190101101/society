@@ -37,6 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
       // displayMessages(response.data.messageObject);
     }
 
-    input.value = '';
+    // input.value = '';
   });
 });
