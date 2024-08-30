@@ -6,7 +6,7 @@ const { message: validator } = require('../core/validator');
 route.get('/messages', controller.messages);
 route.post(
   '/messages',
-  [middleware.messageSanitize, validator.messageSchema],
+  [middleware.bodySanitize, validator.messageSchema],
   controller.sendMessage
 );
 
