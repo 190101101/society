@@ -1,54 +1,24 @@
-const { Server } = require('socket.io');
-const { User, Message } = require('../core/database');
+const socket = require('socket.io');
 
-let online = [];
+let io;
 
-const socket = (httpServer) => {
-  const io = new Server(httpServer, {
-    cors: {
-      origin: '*',
-      methods: ['GET', 'POST'],
-    },
-  });
-
-  io.on('connection', (socket) => {
-    online.push(socket.id);
-
-    io.emit('server:data', {
-      online: online.length,
-      users: User.length,
-      messages: Message.length,
+module.exports = {
+  init: (server) => {
+    io = socket(server, {
+      // path: 'tmp',
+      pingTimeout: 30000,
+      extraHeaders: { 'socket-server': 'token' },
+      cors: {
+        origin: '*',
+        method: ['GET', 'POST'],
+      },
     });
-
-    socket.on('client:message', (data) => {
-      socket.broadcast.emit('server:message', data);
-      io.emit('server:messages', {
-        messages: Message.length,
-      });
-    });
-
-    socket.on('client:newuser', (data) => {
-      io.emit('server:newuser', data);
-      io.emit('server:users', {
-        users: User.length,
-      });
-    });
-
-    socket.emit('client:content', {
-      users: User.reverse(),
-      messages: Message,
-    });
-
-    socket.on('disconnecting', () => {
-      online = [...online.filter((id) => id !== socket.id)];
-
-      io.emit('server:data', {
-        online: online.length,
-        users: User.length,
-        messages: Message.length,
-      });
-    });
-  });
+    return io;
+  },
+  getIo: () => {
+    if (!io) {
+      throw new Error('socket not initilize');
+    }
+    return io;
+  },
 };
-
-module.exports = socket;
