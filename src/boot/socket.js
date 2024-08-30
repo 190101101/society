@@ -2,7 +2,6 @@ const { User, Message } = require('../core/database');
 const socket = require('socket.io');
 
 let online = [];
-let onlinecounter = [];
 
 module.exports = function (server) {
   const io = socket(server, {
@@ -13,8 +12,6 @@ module.exports = function (server) {
   });
 
   io.on('connection', (socket) => {
-    onlinecounter.push(socket.id);
-
     socket.emit('server:connect', socket.id);
 
     socket.on('client:online:check', (data) => {
@@ -23,7 +20,7 @@ module.exports = function (server) {
     });
 
     io.emit('server:data', {
-      online: onlinecounter.length,
+      online: online.length,
       users: User.length,
       messages: Message.length,
     });
@@ -48,11 +45,10 @@ module.exports = function (server) {
     });
 
     socket.on('disconnecting', () => {
-      onlinecounter = [...onlinecounter.filter((id) => id !== socket.id)];
       online = [...online.filter((user) => user.socket !== socket.id)];
 
       io.emit('server:data', {
-        online: onlinecounter.length,
+        online: online.length,
         users: User.length,
         messages: Message.length,
       });
