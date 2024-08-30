@@ -1,9 +1,11 @@
 import '/node/axios/dist/axios.js';
 import { client } from './socket.js';
 import { displayMessages } from './boot.js';
+import { UserData } from './global.js';
 
 window.addEventListener('DOMContentLoaded', () => {
-  const userData = JSON.parse(localStorage.getItem('user'));
+  console.log(UserData);
+
   const button = document.querySelector('.form-button');
   const input = document.querySelector('.form-input');
 
@@ -11,16 +13,23 @@ window.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     const messageObject = {
-      username: userData.username,
+      username: UserData.username,
       message: input.value,
-      icon: userData.icon,
+      icon: UserData.icon,
       createdAt: new Date().toLocaleString(),
+      socket: UserData.socket,
     };
 
     const response = await axios.post(
       'http://localhost:5000/messages',
       messageObject
     );
+
+    client.emit('client:hello', 'hello');
+
+    client.on('server:hello', (data) => {
+      console.log(data);
+    });
 
     if (response.data.errors) {
       alert(response.data.errors[0].msg);

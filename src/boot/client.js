@@ -1,11 +1,2 @@
-let client = null;
-
-let setSocket = (id) => {
-  client = id;
-};
-
-let getSocket = () => {
-  return client;
-};
-
-module.exports = { setSocket, getSocket };
+const socket = require('socket.io-client');
+module.exports = socket('http://localhost:5000');

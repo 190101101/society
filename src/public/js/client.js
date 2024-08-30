@@ -1,10 +1,11 @@
 import { client } from './socket.js';
 import { displayMessages, displayUsers } from './boot.js';
 import { onlineText, usersText, messagesText } from './elements.js';
+import { UserData } from './global.js';
 
-// client.on('connect', () => console.log(client.id));
-// client.emit('client:send', true);
-client.on('server', (data) => console.log(data));
+client.on('server:connect', () => {
+  UserData.socket = client.id;
+});
 
 // sidebar content
 client.on('server:data', (data) => {
