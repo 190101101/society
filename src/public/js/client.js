@@ -5,6 +5,12 @@ import { UserData } from './global.js';
 
 client.on('server:connect', () => {
   UserData.socket = client.id;
+
+  client.emit('client:online:check', UserData);
+
+  client.on('server:online:check', (data) => {
+    console.log(data);
+  });
 });
 
 // sidebar content
@@ -28,10 +34,6 @@ client.on('server:messages', (data) => {
 
 client.on('server:newuser', (data) => {
   displayUsers(data, 'afterbegin');
-});
-
-client.on('server:online', (data) => {
-  // data.forEach((socket) => {});
 });
 
 // sidebar content
