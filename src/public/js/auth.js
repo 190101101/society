@@ -1,4 +1,3 @@
-import { client } from './socket.js';
 import '/node/axios/dist/axios.js';
 
 window.addEventListener('DOMContentLoaded', () => {

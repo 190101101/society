@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {});
 
-export const displayUsers = (data, mode = 'beforeend', online = false) => {
+export const displayUsers = (data, mode = 'beforeend', online = true) => {
   const userList = document.querySelector('.user-list');
 
   const isOdd = userList.children.length % 2 === 0;
