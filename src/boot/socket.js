@@ -13,11 +13,14 @@ module.exports = function (server) {
 
   io.on('connection', (socket) => {
     socket.emit('server:connect', socket.id);
+    online.push(socket);
 
+    /*
     socket.on('client:online:check', (data) => {
       online.push(data);
       io.emit('server:online:check', online);
     });
+    */
 
     io.emit('server:data', {
       online: online.length,
@@ -45,7 +48,8 @@ module.exports = function (server) {
     });
 
     socket.on('disconnecting', () => {
-      online = [...online.filter((user) => user.socket !== socket.id)];
+      // online = [...online.filter((user) => user.socket !== socket.id)];
+      online = [...online.filter((id) => id !== socket)];
 
       io.emit('server:data', {
         online: online.length,

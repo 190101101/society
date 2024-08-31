@@ -6,11 +6,7 @@ import { UserData } from './global.js';
 client.on('server:connect', () => {
   UserData.socket = client.id;
 
-  client.emit('client:online:check', UserData);
-
-  client.on('server:online:check', (data) => {
-    // data.forEach((element) => displayUsers(element, 'afterbegin'));
-  });
+  // client.emit('client:online:check', UserData);
 });
 
 // sidebar content
