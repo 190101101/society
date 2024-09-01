@@ -1,14 +1,14 @@
 const isAuth = (req, res, next) => {
   // console.log(req.session.user);
   if (!req.session.user) {
-    return res.redirect('/login');
+    // return res.redirect('/login');
   }
   next();
 };
 
 const isNoAuth = (req, res, next) => {
   if (req.session.user) {
-    return res.redirect('/');
+    // return res.redirect('/');
   }
   next();
 };

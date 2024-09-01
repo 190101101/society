@@ -13,14 +13,11 @@ module.exports = function (server) {
 
   io.on('connection', (socket) => {
     socket.emit('server:connect', socket.id);
-    online.push(socket);
+    online.push(socket.id);
 
-    /*
     socket.on('client:online:check', (data) => {
-      online.push(data);
-      io.emit('server:online:check', online);
+      io.emit('server:online:check', data);
     });
-    */
 
     io.emit('server:data', {
       online: online.length,

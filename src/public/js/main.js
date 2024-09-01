@@ -1,3 +1,4 @@
+/*
 const toggleSidebarBtn = document.querySelector('.toggle-sidebar-btn');
 const mobileSection = document.querySelector('.mobile-section');
 
@@ -10,6 +11,7 @@ toggleSidebarBtn.addEventListener('click', (e) => {
     mobileSection.classList.add('-right-40');
   }
 });
+*/
 
 //
 const loading = document.querySelector('.loading');

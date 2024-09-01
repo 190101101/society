@@ -5,8 +5,10 @@ import { UserData } from './global.js';
 
 client.on('server:connect', () => {
   UserData.socket = client.id;
-
-  // client.emit('client:online:check', UserData);
+  client.emit('client:online:check', UserData);
+  client.on('server:online:check', (data) => {
+    console.log(data);
+  });
 });
 
 // sidebar content
